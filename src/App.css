@@ -1,0 +1,24 @@
+/* Blinking cursor */
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+.animate-blink {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+/* Smooth gradient glow animation for project title */
+@keyframes title-glow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.animate-title-glow {
+  background-size: 200% 200%;
+  animation: title-glow 4s ease infinite;
+}
