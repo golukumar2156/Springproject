@@ -54,3 +54,15 @@ export const fetchStudent = createAsyncThunk(
     }
   }
 );
+
+//  get search by school
+export const fetchStudentsBySchool = createAsyncThunk(
+  "student/fetchSchool" , async(schoolid,{rejectWithValue})=>{
+    try{
+      const res=await api.get(`student/school/${schoolid}`);
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data);
+    }
+  }
+)

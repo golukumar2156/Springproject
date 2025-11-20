@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createStudent, updateStudent, deleteStudent, fetchStudent } from "./studentauth";
+import { createStudent, updateStudent, deleteStudent, fetchStudent, fetchStudentsBySchool } from "./studentauth";
 
 const studentSlice = createSlice({
   name: "student",
   initialState: {
     student: null,
+    studentsBySchool: [],   // list of students by school
     loading: false,
     error: null,
     message: null,
@@ -14,7 +15,7 @@ const studentSlice = createSlice({
     clearMessage(state) {
       state.message = null;
     },
-    clearStudent(state) {   // ✅ Added clearStudent
+    clearStudent(state) {   // Added clearStudent
       state.student = null;
       state.error = null;
       state.message = null;
@@ -72,14 +73,19 @@ const studentSlice = createSlice({
       .addCase(deleteStudent.fulfilled, (state, action) => {
         state.loading = false;
         state.student = null;
-        state.message = "Student Deleted Successfully ❌";
+        state.message = "Student Deleted Successfully ";
       })
       .addCase(deleteStudent.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+        // Fetch students by school
+      .addCase(fetchStudentsBySchool.pending, (state) => { state.loading = true; state.error = null; state.studentsBySchool = []; })
+      .addCase(fetchStudentsBySchool.fulfilled, (state, action) => { state.loading = false; state.studentsBySchool = action.payload; })
+      .addCase(fetchStudentsBySchool.rejected, (state, action) => { state.loading = false; state.error = action.payload; })
+
   },
 });
 
-export const { clearMessage, clearStudent } = studentSlice.actions; // ✅ export
+export const { clearMessage, clearStudent } = studentSlice.actions; //  export
 export default studentSlice.reducer;

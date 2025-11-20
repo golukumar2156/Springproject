@@ -5,28 +5,25 @@ import { deleteStudent } from "../Reduxtoolkit/students/studentauth";
 const StudentCard = () => {
   const { student } = useSelector((state) => state.student);
   const dispatch = useDispatch();
-if (!student) {
-  return (
-    <div className="flex flex-col justify-center items-center h-60 space-y-4">
-      
-      {/* Avatar */}
-      <div className="flex justify-center">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-          alt="No student avatar"
-          className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-white shadow-lg bg-gray-200 transition-transform transform hover:scale-105"
-        />
+  if (!student) {
+    return (
+      <div className="flex flex-col justify-center items-center h-60 space-y-4">
+        {/* Avatar */}
+        <div className="flex justify-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            alt="No student avatar"
+            className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-white shadow-lg bg-gray-200 transition-transform transform hover:scale-105"
+          />
+        </div>
+
+        {/* Message */}
+        <p className="text-gray-300 text-lg md:text-xl font-semibold text-center">
+          No Student Data Found
+        </p>
       </div>
-
-      {/* Message */}
-      <p className="text-gray-300 text-lg md:text-xl font-semibold text-center">
-        No Student Data Found
-      </p>
-
-    </div>
-  );
-}
-
+    );
+  }
 
   const handleDelete = () => {
     if (student?.roll) {
